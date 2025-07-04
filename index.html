@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Web App</title>
+    <style>
+        body { font-family: Arial; background-color: #fafafa; padding: 20px; }
+        header, footer { background-color: #4CAF50; color: white; padding: 15px; text-align: center; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to My Web App</h1>
+</header>
+
+<p>Your public IP: <span id="public-ip">Loading...</span></p>
+<p>Your local IP: <span id="local-ip">Loading...</span></p>
+
+<button onclick="fetchIP()">Refresh IP</button>
+
+<footer>
+    <p>© 2025 My Company</p>
+</footer>
+
+<script>
+function fetchIP() {
+    fetch('http://10.0.2.2:5000/public-ip')
+        .then(response => response.json())
+        .then(data => document.getElementById('public-ip').innerText = data.public_ip);
+
+    fetch('http://10.0.2.2:5000/local-ip')
+        .then(response => response.json())
+        .then(data => document.getElementById('local-ip').innerText = data.local_ip);
+}
+
+fetchIP();
+</script>
+
+</body>
+</html>
